@@ -1,0 +1,72 @@
+<%- include('../partials/header.ejs') %>
+<div class="container-flud my-4 custom-container body-full-height">
+    <div class="row">
+        <div class="col-lg-1    col-0"></div>
+        <div class="col-lg-10 col-12">
+            <div class="form-container center-form">
+                <h3 class="text-center mb-5">Lịch sử giao dịch</h3>
+                <form class="px-3">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Loại giao dịch</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Trạng thái</th>   
+                            <th scope="col">Thao tác</th>   
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% if (historyList.length > 0) { %>
+                            <% for(var i=0; i<historyList.length; i++) {%>
+                              <tr>
+                                  <th scope="row"><%= i + 1%></th>
+                                  <td><%= historyList[i].TYPE == 1? "Nạp tiền": 
+                                          historyList[i].TYPE == 2? "Rút tiền": 
+                                          historyList[i].TYPE == 3? "Chuyển tiền": 
+                                          historyList[i].TYPE == 4? "Mua thẻ điện thoại": 
+                                          "Không rõ"%></td>
+                                  <td><%= historyList[i].CREATED_ON ? moment(historyList[i].CREATED_ON).add(7, 'hours').format('DD/MM/YYYY - HH:mm') : ""  %></td>
+                                  <td class=""><%= historyList[i].HISTORY_TOTAL %></td>
+                                  <td><%= historyList[i].HISTORY_STATUS == 1?"Thành công":
+                                          historyList[i].HISTORY_STATUS == 0?"Chờ duyệt":
+                                          "Thất bại"%></td>
+                                  <td>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" onclick="transactionHistory_viewDetail(<%= historyList[i].TYPE %>, <%= historyList[i].HISTORY_ID %>, <%= historyList[i].TRANSACTION_ID %>, <%= historyList[i].USER_ID %>)">
+                                        Xem chi tiết
+                                    </button>
+                                  </td>
+                              </tr>
+                        <% }} else { %>
+                            <tr><td colspan=7 class="text-center table-alert py-5"><div><i class="fas fa-exclamation"></i></div>Không có tài khoản nào bị khóa</td></tr>
+                        <% } %>
+                          
+                        </tbody>
+                      </table>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-1 col-0"></div>
+    </div>
+</div>
+  
+<!--Detail Transaction History Modal -->
+<div class="modal fade" id="modal_view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="col-4"></div>
+        <h5 class="modal-title">Chi tiết giao dịch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>  
+
+        <div id="modal_body" class="modal-body px-4"></div>
+      </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer.ejs') %>

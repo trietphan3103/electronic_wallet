@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs') %>
+<div style="background-color: inherit;" class="swap">
+    <div class="mycontainer my-4 custom-container body-full-height w-50">
+        <form id="recharge_form">
+            <h2 class="title_recharge">Nạp tiền vào ví</h2>
+            <div class="form-group">
+                <label for="card_number">Số thẻ</label>
+                <input type="number" class="form-control" name="card_number" id="card_number" placeholder="Nhập số thẻ">
+            </div>
+            <div class="form-group">
+                <div class="div_date">
+                    <label for="exp_date">Ngày hết hạn</label>
+                    <input type="date" class="form-control" name="exp_date" id="exp_date">
+                </div>
+
+                <div class="div_cvv">
+                    <label for="cvv">Số cvv</label>
+                    <input type="number" class="form-control" id="cvv" name="cvv" placeholder="Nhập số cvv">
+                </div>
+            </div>  
+            <div class="form-group">
+                <label for="amount_of_money">Số tiền muốn nạp</label>
+                <input type="number" class="form-control" id="amount_of_money" name="amount_of_money" placeholder="Nhập số tiền">
+            </div>  
+            <div class="alert alert-danger" id="alert_danger" style="display: none"></div>
+            <div class="alert alert-info" id="alert_info"  style="display: none"></div>
+            <div class="button_accept">
+                <button type="submit" class="btn btn-success btn-accept">Xác nhận</button>
+            </div>
+            <div id="complete_block" style="display: none" class="mt-3">
+                <div class="d-flex justify-content-around flex-wrap">
+                    <a id="complete_btn1" style="display: block" href="/"><div class="btn btn-success mb-2" id="alert_info2">Quay lại trang chủ</div></a>
+                    <a id="complete_btn2" style="display: blcok" href="/transaction/recharge"><div class="btn btn-success mb-2" id="alert_info2">Giao dịch khác</div></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>

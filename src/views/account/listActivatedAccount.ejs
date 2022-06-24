@@ -1,0 +1,193 @@
+<%- include('../partials/header.ejs') %>
+    <div style="background-color: inherit;" class="swap">
+        <div class="mycontainer col-12 d-flex justify-content-around list-order-box my-4">
+            <div class="row all-box-item">
+                <div class="col-12 waiting-confirm-box">
+                    <div class="card selected">
+                        <a href="/account/listActivatedAccount">
+                            <div class="card-body d-flex flex-column justify-content-between align-items-center">
+                                <h5 class="card-title pt-1" style="color: #007bfd;">Đã kích hoạt</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row all-box-item">
+                <div class="col-12 shipping-box">
+                    <div class="card">
+                        <a href="/account/listWaitingAccount">
+                            <div class="card-body d-flex flex-column justify-content-between align-items-center">
+                                <h5 class="card-title pt-1 " style="color: #007bfd;">Chờ kích hoạt</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row all-box-item">
+                <div class="col-12 shipped-box">
+                    <div class="card">
+                        <a href="/account/listDisabledAccount">
+                            <div class="card-body d-flex flex-column justify-content-between align-items-center">
+                                <h5 class="card-title pt-1" style="color: #007bfd;">Đã bị vô hiệu hóa</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row all-box-item">
+                <div class="col-12 canceled-box">
+                    <div class="card">
+                        <a href="/account/listLockedAccount">
+                            <div class="card-body d-flex flex-column justify-content-between align-items-center">
+                                <h5 class="card-title pt-1" style="color: #007bfd;">Đã bị khóa vô thời hạn</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+        </div>
+        <div class="mycontainer my-4 custom-container">
+            <h3 class="text-center mb-5">Danh sách tài khoản đã kích hoạt</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Username</th>
+                        <th>Họ tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Ngày tạo</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (account.length > 0) { %>
+                        <% for(var i=0; i<account.length; i++) {%>
+                            <tr>
+                                <td>
+                                    <%= account[i].user_id %>
+                                </td>
+                                <td>
+                                    <%= account[i].user_name %>
+                                </td>
+                                <td>
+                                    <%= account[i].name %>
+                                </td>
+                                <td>
+                                    <%= account[i].phone %>
+                                </td>
+                                <td>
+                                    <%= account[i].email %>
+                                </td>
+                                <td>
+                                    <%=  moment(account[i].created_on).add(7, 'hours').format('DD/MM/YYYY - HH:mm') %>
+                                </td>
+                                <td><button type="button" class="btn btn-primary view-detail-btn" data-toggle="modal"
+                                    data-target="#detail-account" data-name="<%= account[i].name %>" data-user_name="<%= account[i].user_name %>"
+                                    data-dob="<%= moment(account[i].time_create_status).add(7, 'hours').format('DD/MM/YYYY') %>" 
+                                    data-phone="<%= account[i].phone %>" data-created_on="<%= moment(account[i].created_on).add(7, 'hours').format('DD/MM/YYYY') %>" 
+                                    data-email="<%= account[i].email %>" data-address="<%= account[i].address %>"
+                                    data-card_front="data:image/png;base64,<%= account[i].id_card_front; %>" data-card_behind="data:image/png;base64,<%= account[i].id_card_behind; %>"
+                                    data-id="<%= account[i].user_id %>">
+                                             Xem chi tiết 
+                                    </button>
+                                </td>
+                            </tr>
+                    <% }} else { %>
+                        <tr><td colspan=7 class="text-center table-alert py-5"><div><i class="fas fa-exclamation"></i></div>Không có tài khoản nào đã được kích hoạt</td></tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="detail-account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Thông tin tài khoản</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Họ tên:</td>
+                                    <td class="font-weight-bold text-success name">Nguyễn văn B</td>
+                                </tr>
+                                <tr>
+                                    <td>Username:</td>
+                                    <td class="font-weight-bold user_name">3214576321</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày tháng năm sinh:</td>
+                                    <td class="font-weight-bold dob"><input type="date" name="dob" placeholder="03/22/2022"
+                                            autocomplete="off" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại:</td>
+                                    <td class="font-weight-bold phone">0914751488</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td class="font-weight-bold email">nguyenvanb@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ:</td>
+                                    <td class="font-weight-bold address">3 Lạc Long Quân P5 Q11</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày tạo:</td>
+                                    <td class="font-weight-bold created_on"><input type="date" name="dob" placeholder="03/22/2022"
+                                            autocomplete="off" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td>CMND mặt trước:</td>
+                                    <td><img class="card_front" src="" alt="image" width="100%"></td>
+                                </tr>
+                                <tr>
+                                    <td>CMND mặt sau:</td>
+                                    <td><img class="card_behind" src="" alt="image" width="100%"></td>
+                                </tr>
+                            </table>
+                            <h5 class="modal-title" id="exampleModalLabel">Lịch sử giao dịch</h5>
+                        </div>
+
+                        <div class="modal-footer">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Loại giao dịch</th>
+                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Trạng thái</th>   
+                                    <th scope="col">Thao tác</th>   
+                                  </tr>
+                                </thead>
+                                <tbody id="historyList">
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Detail Transaction History Modal -->
+    <div class="modal fade" id="modal_view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-4"></div>
+                    <h5 class="modal-title">Chi tiết giao dịch</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>  
+                <div id="modal_body" class="modal-body px-4"></div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>

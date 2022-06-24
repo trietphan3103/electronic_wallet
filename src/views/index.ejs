@@ -1,0 +1,142 @@
+<%- include('./partials/header.ejs') %>
+  <%if (typeof user ==='undefined' ) { %>
+    <div class="container-flud my-4 custom-container">
+      <div class="row">
+        <div class="col-lg-6 col-12" style="position: relative">
+          <div class="slogan-container">
+            <p class="slogan-big">Pay Anything</p>
+            <p class="slogan-big">Anywhere Easier</p>
+            <p class="slogan-small">
+              Top up, Transfer, and Balance Withdraw is Easy
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-12">
+          <div class="form-container">
+            <h3 class="text-center mb-2">Đăng ký tài khoản</h3>
+            <form id="signup_form">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Họ và tên</label>
+                    <input type="text" class="form-control" placeholder="Họ và tên" name="name" id="name" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="">Ngày sinh</label>
+                    <input type="date" class="form-control" name="birthday" id="birthday" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="">Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone" id="phone" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Địa chỉ</label>
+                    <input type="text" class="form-control" placeholder="Địa chỉ" name="address" id="address" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" name="email" id="email" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="">Mặt trước CMND</label>
+                    <input type="file" class="form-control" name="id_card_front" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="">Mặt sau CMND</label>
+                    <input type="file" class="form-control" name="id_card_behind" />
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-danger" id="alert_danger" style="display: none"></div>
+              <div class="alert alert-info" id="alert_info" style="display: none"></div>
+              <div class="loader-container">
+                <div class="d-flex justify-content-center w-100">
+                  <button type="submit" class="btn btn-success w-100" id="signup_btn">
+                    Submit
+                  </button>
+                </div>
+                <span class="loader" id="loader" style="display: none"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }else{%>
+    <div style="background-color: inherit" class="swap my-4">
+        <div class="container index-container">
+            <div class="row">
+                <div class="col-12 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 d-flex align-items-center">
+                            <h2>Welcome back!</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="row-top">
+                                <h5 class="pb-2">Số dư hiện tại</h5>
+                                <div class="form-group">
+                                    <span class="title-balance money-format"><%= user_detail.balance %></span>
+                                </div>
+                                <% if(user_detail.user_name != 'admin' ) { %>
+                                  <a href="transaction/transaction-history" class="title-history">
+                                    Lịch sử giao dịch
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                  </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if(user_detail.user_name != 'admin' ) { %>
+                  <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <a href="/transaction/recharge" class="card-trans">
+                                <h5>Nạp tiền</h5>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <a href="/transaction/withdraw" class="card-trans">
+                                <h5>Rút tiền</h5>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <a href="/transfer/transfer" class="card-trans">
+                                <h5>Chuyển tiền</h5>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <a href="/card/buy-card" class="card-trans">     
+                                <h5>Mua thẻ điện thoại</h5>
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <%} %>
+
+
+        <%- include('./partials/footer.ejs') %>

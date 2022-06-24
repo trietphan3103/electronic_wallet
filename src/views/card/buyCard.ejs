@@ -1,0 +1,98 @@
+<%- include('../partials/header.ejs') %>
+    <div class="container-flud my-4 custom-container" id="buy_card">
+        <div class="row">
+            <div class="col-lg-3 col-0"></div>
+            <div class="col-lg-6 col-12">
+                <div class="form-container center-form">
+                    <h3 class="text-center mb-2">Mua thẻ điện thoại</h3>
+                    <form class="px-3" id="buy_card_form">
+                        <div class="form-group row">
+                            <label class="col-12 col-lg-4 label-same-line" for="">Nhà mạng:</label>
+                            <select class="form-control" name="mobile_network_id" id="mobile_network_id">
+                                <option value="11111">Viettel</option>
+                                <option value="22222">Mobifone</option>
+                                <option value="33333">Vinaphone</option>
+                            </select>
+                        </div>
+                        <ul class="row card-price">
+                            <li class="col-6 col-lg-6" class="price_label">
+                                <input type="radio" value="10000" id="a10" name="amount" />
+                                <label for="a10"  class="py-2 text-center">10.000</label>
+                            </li>
+                            <li class="col-6 col-lg-6">
+                                <input type="radio" value="20000" id="a20" name="amount" />
+                                <label for="a20"  class="py-2 text-center">20.000</label>
+                            </li>
+                            <li class="col-6 col-lg-6">
+                                <input type="radio" value="50000" id="a50" name="amount" />
+                                <label for="a50"  class="py-2 text-center">50.000</label>
+                            </li>
+                            <li class="col-6 col-lg-6">
+                                <input type="radio" value="100000" id="a100" name="amount" />
+                                <label for="a100"  class="py-2 text-center">100.000</label>
+                            </li>
+                        </ul>
+                        <div class="form-group row">
+                            <label class="col-4 label-same-line" for="">Số lượng:</label>
+                            <input style="width: 50px" type="number" class="form-control col-12 col-lg-2"
+                                min="1" max="5" id="quantity" value="1" name="quantity" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 label-same-line" for="">Phí giao dịch:</label>
+                            <p class="col-8 label-same-line font-weight-bold">0</p>
+                        </div>
+                        <div class="seperate row mb-2"></div>
+                        <div class="row pb-0">
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label class="col-3 label-same-line" for="">Tổng tiền:</label>
+                                    <h4 class="col-9 label-same-line font-weight-bold text-total" id="total_price">
+                                        0
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger text-center" id="alert_danger" style="display: none;"></div>
+                        <div class="alert alert-info text-center" id="alert_info" style="display: none;"></div>
+                        <div class="d-flex justify-content-center w-100">
+                            <button type="submit" class="btn btn-success w-50">Thanh toán</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-flud my-4 custom-container body-full-height" id="buy_card_complete" style="display: none;">
+        <div class="row">
+            <div class="col-lg-3 col-0"></div>
+            <div class="col-lg-6 col-12">
+                <div class="form-container center-form">
+                    <h3 class="text-center mb-2">Giao dịch thành công</h3>
+                    <div class="alert alert-info text-center" id="alert_info2" style="display: none;"></div>
+                    <div class="px-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Nhà mạng</th>
+                                    <th scope="col">Mã thẻ</th>
+                                    <th scope="col">Mệnh giá</th>
+                                </tr>
+                            </thead>
+                            <tbody id="result_body">
+                            </tbody>
+                        </table>
+                        <div id="complete_block" style="display: none" class="mt-3">
+                            <div class="d-flex justify-content-around flex-wrap">
+                                <a id="complete_btn1" style="display: block" href="/"><div class="btn btn-success mb-2" id="alert_info2">Quay lại trang chủ</div></a>
+                                <a id="complete_btn2" style="display: blcok" href="/card/buy-card"><div class="btn btn-success mb-2" id="alert_info2">Giao dịch khác</div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-0"></div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>

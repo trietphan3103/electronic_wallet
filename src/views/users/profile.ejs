@@ -1,0 +1,86 @@
+<%- include('../partials/header.ejs') %>
+<div style="background-color: inherit" class="swap my-4">
+    <div class="container mycontainer">
+        <div class="alert alert-info mt-5" id="alert_info" style="display: none"></div>
+        <div class="row">
+            <div class="col-md-4 my-auto">
+                <h4><%= user_detail.name %></h4>
+                <div>
+                    <label for="username" class="profile-bold-text">Username:</label>
+                    <span><%= user_detail.user_name %></span>
+                </div>
+            </div>
+            <div class="col-md-4 colBorderLeft">
+                <div class="form-group">
+                    <label for="username" class="profile-bold-text">Ngày tháng năm sinh:</label>
+                    <div><%= moment(user_detail.dob).format('DD/MM/YYYY'); %></div>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="profile-bold-text">Số điện thoại:</label>
+                    <span><%= user_detail.phone; %></span>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="profile-bold-text">Email:</label>
+                    <span><%= user_detail.email; %></span>
+
+                </div>
+                <div class="form-group">
+                    <label for="username" class="profile-bold-text">Địa chỉ:</label>
+                    <span><%= user_detail.address; %></span>
+                </div>
+
+            </div>
+            <div class="col-md-4 colBorderLeft">
+                <div class="form-group">
+                    <label class="profile-bold-text">Trạng thái:</label>
+                    <span id="state-text"><%= user_detail.status === 0?'Chưa xác minh'
+                                            :user_detail.status === 1?'Chờ cập nhật'
+                                            :'Đã xác minh'; %></span>
+                </div>
+                    <div class="form-group">
+                        <label class="profile-bold-text">CMND mặt trước:</label>
+                        <div class="mb-3">
+                            <img src="data:image/png;base64,<%= user_detail.id_card_front; %>" alt="CMND-mặt-trước" width="100%" height="50%">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="profile-bold-text">CMND mặt sau:</label>
+                        <div>
+                            <img src="data:image/png;base64,<%= user_detail.id_card_behind; %>" alt="CMND-mặt-sau" width="100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% if (user_detail.status === 1) {%>
+            <div class="form-container mycontainer mt-4" id="update_id_card_container">
+                <h3 class="text-center mb-2">Yêu cầu cập nhật ảnh CMND</h3>
+                <form id="update_id_card_form">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="">Mặt trước CMND</label>
+                                <input type="file" class="form-control" name="id_card_front">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="">Mặt sau CMND</label>
+                                <input type="file" class="form-control" name="id_card_behind">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" id="alert_danger" style="display: none"></div>
+                    <div class="loader-container">
+                        <div class="d-flex justify-content-center w-100">
+                            <button type="submit" class="btn btn-success w-100" id="update_id_card_btn" data-id="<%= user_detail.user_id; %>">
+                                Gửi yêu cầu
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                </div>    
+        <% } %> 
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>

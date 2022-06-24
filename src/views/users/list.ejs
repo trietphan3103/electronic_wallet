@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs') %>
+<div class="container w-75">
+    <div class="my-5">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">add user</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">username</th>
+            <th scope="col">password</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i<users.length; i++) {%>
+            <tr>
+                <td><%= users[i].user_id %></td>
+                <td><%= users[i].user_name %></td>
+                <td><%= users[i].password %></td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username"
+                        name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                        name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

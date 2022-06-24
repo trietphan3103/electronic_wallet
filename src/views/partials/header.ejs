@@ -1,0 +1,63 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1 class="text-light"><a href="/"><span>Paynet</span></a></h1>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <% if (typeof user_detail !== 'undefined' && user_detail.first_login === 1) { %>
+                    <li class="logout-btn"><a href="/users/logout">Đăng xuất</a></li>
+                <% } else {%>
+                    <li><a class="nav-link scrollto" href="/">Trang chủ</a></li>
+                
+                    <%if (typeof user !== 'undefined' && user.username !== 'admin') { %>
+                        <li class="dropdown">
+                            <a href="#">Dịch vụ
+                                <i class="dropdown-icon fas fa-chevron-down"></i>
+                                <i class="dropdown-icon-mobile fas fa-chevron-right"></i>
+                            </a>
+                            <ul>
+                                <li><a href="/transaction/recharge">Nạp tiền</a></li>
+                                <li><a href="/transaction/withdraw">Rút tiền</a></li>
+                                <li><a href="/card/buy-card">Mua thẻ</a></li>
+                                <li><a href="/transfer/transfer">Chuyển tiền</a></li>
+                            </ul>
+                        </li>
+                    <% } %>
+                    <li><a class="nav-link scrollto" href="#">Hướng dẫn</a></li>
+                    <li><a class="nav-link scrollto" href="#">Blog</a></li>
+                    <%if (typeof user !== 'undefined') { %>
+                        <%if (user.username === 'admin') { %>
+                            <li class="dropdown">
+                                <a class="nav-link scrollto account" href="/account/listActivatedAccount"> Quản lý người dùng</a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="nav-link scrollto account" href="/transaction/listWaitingTransaction">Phê duyệt giao dịch</a>
+                            </li>
+                        <% } %>
+                        <li class="dropdown">
+                            <a class="nav-link scrollto account" href="#"> <i class="fas fa-user-circle"></i> &nbsp &nbsp  <%= user.username %></a>
+                            <ul class="account-dropdown">
+                                <li><a href="/users/profile">Thông tin người dùng</a></li>
+                                <li><a href="/users/change-password">Đổi mật khẩu</a></li>
+                                <li class="logout-btn"><a href="/users/logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    <% }else{%>
+                        <li><a class="nav-link scrollto login-button" href="/users/login">Đăng nhập</a></li>
+                    <%} %>
+                <% } %>
+        
+                
+
+            </ul>
+            <i class="fas fa-bars mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+
+    </div>
+</header>
+<!-- End Header -->

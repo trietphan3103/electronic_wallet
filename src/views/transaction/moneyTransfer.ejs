@@ -1,0 +1,126 @@
+<%- include('../partials/header.ejs') %>
+<div id="transfer-box" class="container-flud my-4 custom-container">
+    <div class="row">
+        <div class="col-lg-3 col-0"></div>
+        <div class="col-lg-6 col-12">
+            <div class="form-container center-form">
+                <h3 class="text-center mb-2">Chuyển tiền</h3>
+                <form id="transfer_form" class="px-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12 col-lg-4 label-same-line" for="">Số điện thoại:</label>
+                                <input type="text" class="form-control col-12 col-lg-8" placeholder="Nhập số điện thoại người nhận" id="transfer-recipient">
+                                <p class="text-danger mt-2 mb-0" id="message_transfer_recipient"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12 col-lg-4 label-same-line" for="recipient_name">Tên người nhận</label>
+                                <p id="recipient_name" class="text-success font-weight-bold px-0 mx-0 mt-2 mb-2 col-12 col-lg-8"></p>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seperate row mb-3 mt-1"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="" for="">Số tiền muốn chuyển</label>
+                                <input type="text" class="form-control" id="transfer-amount">
+                                <p class="text-danger mt-2 mb-0" id="message_transfer_amount"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-0">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-4 label-same-line" for="">Phí giao dịch:</label>
+                                <p class="col-8 label-same-line font-weight-bold" id="transfer-fee" style="display: none;">800000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label>Vui lòng chọn người trả phí giao dịch:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="row who-pay" id="bearer">
+                        <li class="col-12 col-lg-6">
+                            <input type="radio" id="a25" name="transfer-bearer" value="0">
+                            <label for="a25" class="py-2 text-center">Bên gửi chịu phí</label>
+                        </li>
+                        <li class="col-12 col-lg-6">
+                            <input type="radio" id="a50" name="transfer-bearer" value="1">
+                            <label for="a50" class="py-2 text-center">Bên nhận chịu phí</label>
+                        </li>
+                    </ul>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label for="">Ghi chú</label>
+                                <textarea class="form-control" id="transfer-note" placeholder="Nhập nội dung chuyển tiền tại đây" rows="3"></textarea>
+                                <p class="text-danger mt-2 mb-0" id="message_transfer_note"></p>
+                                <div class="text-danger mt-2 mb-0" id="alert_danger" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seperate row mb-2 mt-1"></div>
+                    <div class="row pb-0">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-3 label-same-line" for="">Tổng tiền:</label>
+                                <p class="col-9 label-same-line font-weight-bold text-total" id="transfer_total" name="transfer_total" style="display: none;">800000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center w-100">
+                        <button id="submit-btn" type="submit" class="btn btn-success w-50">Xác nhận</button>
+                        <span class="loader ml-3" id="loader" style="display: none"></span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3 col-0"></div>
+    </div>
+</div>
+
+<div id="confirm-otp-box" style="display: none;" class="container-flud my-4 custom-container">
+    <div class="row">
+        <div class="col-0 col-lg-3"></div>
+        <div class="col">
+            <div class="form-container center-form">
+                <h3 class="text-center mb-2">Xác thực OTP</h3>
+                <form id="confirm-otp-form">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="">Mã OTP</label>
+                                <input type="text" class="form-control" id="OTP" placeholder="Nhập mã OTP">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info text-center" id="alert_info" style="display: none;"></div>
+                    <div class="alert alert-danger text-center" id="alert_danger2" style="display: none;"></div>
+                    <div class="d-flex justify-content-center w-100">
+                        <button type="submit" id="submit-otp-btn" class="btn btn-success w-100" data-date="">Submit</button>
+                        <span class="loader ml-3" id="loader2" style="display: none"></span>
+                    </div>
+                    <div id="complete_block" style="display: none" class="mt-3">
+                        <div class="d-flex justify-content-around flex-wrap">
+                            <a id="complete_btn1" style="display: block" href="/"><div class="btn btn-success mb-2" id="alert_info2">Quay lại trang chủ</div></a>
+                            <a id="complete_btn2" style="display: blcok" href="/transfer/transfer"><div class="btn btn-success mb-2" id="alert_info2">Giao dịch khác</div></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-0 col-lg-3"></div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
